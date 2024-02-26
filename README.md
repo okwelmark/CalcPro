@@ -52,9 +52,9 @@ Contributions are what make the open-source community such an amazing place to l
 
 ## Contact
 
-[Your Name] - [Your Email]
+[ Okwel Edgar Mark ] - [ mcedgar190@gmail.com]
 
-Project Link: [https://github.com/your-username/calculator-app](https://github.com/your-username/calculator-app)
+Project Link: [https://git@github.com:okwelmark/CalcPro.git)
 
 ## Acknowledgements
 
