@@ -54,7 +54,7 @@ Contributions are what make the open-source community such an amazing place to l
 
 [ Okwel Edgar Mark ] - [ mcedgar190@gmail.com]
 
-Project Link: [https://git@github.com:okwelmark/CalcPro.git)
+Project Link: [https://git@github.com:okwelmark/mobileprogramming.git)
 
 ## Acknowledgements
 
