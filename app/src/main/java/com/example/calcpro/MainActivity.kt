@@ -1,58 +1,101 @@
 package com.example.calcpro
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import com.example.calcpro.databinding.ActivityMainBinding
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var resultTv: TextView
+    private lateinit var solutionTv: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        resultTv = findViewById(R.id.result_tv)
+        solutionTv = findViewById(R.id.solution_tv)
 
-        setSupportActionBar(binding.toolbar)
+        // Set up number buttons
+        val numberButtons = arrayOf(
+            R.id.zero, R.id.one, R.id.two, R.id.three, R.id.four,
+            R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine
+        )
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        for (buttonId in numberButtons) {
+            findViewById<MaterialButton>(buttonId).setOnClickListener {
+                val buttonText = (it as MaterialButton).text
+                val currentText = resultTv.text
+                resultTv.text = "$currentText$buttonText"
+            }
+        }
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        // Set up arithmetic buttons
+        val arithmeticButtons = arrayOf(
+            R.id.addition, R.id.subtraction, R.id.multiplication, R.id.division
+        )
+
+        for (buttonId in arithmeticButtons) {
+            findViewById<MaterialButton>(buttonId).setOnClickListener {
+                val operator = (it as MaterialButton).text
+                val expression = resultTv.text
+                resultTv.text = "$expression $operator "
+            }
+        }
+
+        // Set up equals button
+        val equalsButton = findViewById<MaterialButton>(R.id.equals)
+        equalsButton.setOnClickListener {
+            val expression = resultTv.text.toString()
+            val result = evaluateExpression(expression)
+            solutionTv.text = result
+        }
+
+        // Set up delete button
+        val deleteButton = findViewById<MaterialButton>(R.id.delete)
+        deleteButton.setOnClickListener {
+            val currentText = resultTv.text.toString()
+            if (currentText.isNotEmpty()) {
+                resultTv.text = currentText.substring(0, currentText.length - 1)
+            }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
+    private fun evaluateExpression(expression: String): String {
+        // Split expression based on space
+        val parts = expression.split(" ")
+        var result = 0.0
+        var operator = ""
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        for (part in parts) {
+            when {
+                part == "+" || part == "-" || part == "*" || part == "/" -> {
+                    operator = part
+                }
+                operator.isEmpty() -> {
+                    result = part.toDouble()
+                }
+                operator.isNotEmpty() -> {
+                    val operand = part.toDouble()
+                    when {
+                        operator == "/" && operand == 0.0 -> {
+                            return "Syntax error"
+                        }
+                        else -> {
+                            result = when (operator) {
+                                "+" -> result + operand
+                                "-" -> result - operand
+                                "*" -> result * operand
+                                "/" -> result / operand
+                                else -> result
+                            }
+                            operator = ""
+                        }
+                    }
+                }
+            }
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        return result.toString()
     }
 }
