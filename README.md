@@ -24,7 +24,7 @@ To get a local copy up and running, follow these steps:
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/calculator-app.git
+git clone https://github.com/okwelmark/mobileprogramming.git
 ```
 
 2. Open the project in Android Studio.
@@ -53,7 +53,8 @@ Contributions are what make the open-source community such an amazing place to l
 ## Contact
 
 [ Okwel Edgar Mark ] - [ mcedgar190@gmail.com]
-
+[ Ntulume Wilson ] - [ ntuwilson02@gmail.com ]
+[ Namanya Samuel ] - [  ]
 Project Link: [https://git@github.com:okwelmark/mobileprogramming.git)
 
 ## Acknowledgements
