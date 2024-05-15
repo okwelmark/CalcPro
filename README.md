@@ -2,16 +2,6 @@
 
 ---
 
-# Calculator App - CalcPro
-
-This is a simple calculator app developed for Android using Kotlin programming language and Android Studio.
-
-## Features
-
-- Basic arithmetic operations: addition, subtraction, multiplication, and division.
-- Clear button to reset the input.
-- Support for parentheses to change the order of operations.
-- Memory functionality to store and recall previous calculations.
 
 ## Screenshots
 
@@ -54,7 +44,7 @@ Contributions are what make the open-source community such an amazing place to l
 
 [ Okwel Edgar Mark ] - [ mcedgar190@gmail.com]
 [ Ntulume Wilson ] - [ ntuwilson02@gmail.com ]
-[ Namanya Samuel ] - [  ]
+[] - [  ]
 Project Link: [https://git@github.com:okwelmark/mobileprogramming.git)
 
 ## Acknowledgements
